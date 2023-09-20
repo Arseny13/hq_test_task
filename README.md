@@ -8,20 +8,22 @@
 Суть задания заключается в проверке знаний построения связей в БД и умение правильно строить запросы без ошибок N+1.
 
 Перед тем, как приступить к выполнению задания, советуем изучить материалы, которые помогут в выполнении заданий:
-https://docs.djangoproject.com/en/4.2/intro/tutorial01/
-https://docs.djangoproject.com/en/4.2/topics/db/models/
-https://docs.djangoproject.com/en/4.2/topics/db/queries/
-https://docs.djangoproject.com/en/4.2/ref/models/querysets/
-https://www.django-rest-framework.org/tutorial/quickstart/
-https://www.django-rest-framework.org/api-guide/viewsets/
-https://www.django-rest-framework.org/api-guide/serializers/
+
+- https://docs.djangoproject.com/en/4.2/intro/tutorial01/
+- https://docs.djangoproject.com/en/4.2/topics/db/models/
+- https://docs.djangoproject.com/en/4.2/topics/db/queries/
+- https://docs.djangoproject.com/en/4.2/ref/models/querysets/
+- https://www.django-rest-framework.org/tutorial/quickstart/
+- https://www.django-rest-framework.org/api-guide/viewsets/
+- https://www.django-rest-framework.org/api-guide/serializers/
 
 
 #  Построение архитектуры(3 балла)
 В этом задании у нас есть три бизнес-задачи на хранение:
 Создать сущность продукта. У продукта должен быть владелец. Необходимо добавить сущность для сохранения доступов к продукту для пользователя.
 Создать сущность урока. Урок может находиться в нескольких продуктах одновременно. В уроке должна быть базовая информация: название, ссылка на видео, длительность просмотра (в секундах).
-Урок могут просматривать множество пользователей. Необходимо для каждого фиксировать время просмотра и фиксировать статус “Просмотрено”/”Не просмотрено”. Статус “Просмотрено” проставляется, если пользователь просмотрел 80% ролика.
+Урок могут просматривать множество пользователей. Необходимо для каждого фиксировать время просмотра и фиксировать статус “Просмотрено”/”Не просмотрено”. 
+Статус “Просмотрено” проставляется, если пользователь просмотрел 80% ролика.
 
 # Написание запросов(7 баллов)
 В этом пункте потребуется использовать выполненную вами в прошлом задании архитектуру:
