@@ -34,11 +34,13 @@ class UserProduct(models.Model):
     user = models.ForeignKey(
         User,
         verbose_name='пользователь',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='product'
     )
     product = models.ForeignKey(
         Product,
         verbose_name='продукт',
+        related_name='user',
         on_delete=models.CASCADE
     )
 
@@ -92,12 +94,14 @@ class ProductLesson(models.Model):
     product = models.ForeignKey(
         Product,
         verbose_name='продукт',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='productlesson'
     )
     lesson = models.ForeignKey(
         Lesson,
         verbose_name='урок',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='productlesson'
     )
 
     class Meta:
@@ -115,11 +119,13 @@ class UserLesson(models.Model):
     user = models.ForeignKey(
         User,
         verbose_name='пользователь',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='lesson'
     )
     lesson = models.ForeignKey(
         Lesson,
         verbose_name='урок',
+        related_name='user',
         on_delete=models.CASCADE
     )
     time = models.IntegerField(

@@ -22,6 +22,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     'rest_framework',
+    'rest_framework.authtoken',
+    'django_filters',
+    'djoser',
 
     'api',
     'lesson'
@@ -102,3 +105,17 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+
+DJOSER = {
+    'SEND_ACTIVATION_EMAIL': False,
+    'LOGIN_FIELD': 'email',
+}
