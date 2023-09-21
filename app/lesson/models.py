@@ -4,11 +4,6 @@ from django.core.exceptions import NON_FIELD_ERRORS, ValidationError
 
 User = get_user_model()
 
-STATUS_LESSON = (
-    ('1', 'Не просмотрено'),
-    ('2', 'Просмотрено')
-)
-
 
 class Product(models.Model):
     """Модель продукта."""
@@ -20,7 +15,8 @@ class Product(models.Model):
     )
     name = models.CharField(
         'навзание продукта',
-        max_length=40
+        max_length=40,
+        unique=True
     )
 
     class Meta:
@@ -70,10 +66,12 @@ class Lesson(models.Model):
     )
     title = models.CharField(
         'Название урока',
-        max_length=30
+        max_length=30,
+        unique=True
     )
     url = models.URLField(
-        'ссылка на видео'
+        'ссылка на видео',
+        unique=True
     )
     total_time = models.IntegerField(
         'Длительность урока в секундах'
@@ -124,20 +122,28 @@ class UserLesson(models.Model):
         verbose_name='урок',
         on_delete=models.CASCADE
     )
-    status = models.CharField(
-        max_length=1,
-        choices=STATUS_LESSON,
-        default=1
-        )
     time = models.IntegerField(
-        'Время просмотра.'
+        'Время просмотра.',
+        default=0
     )
-    date_last = models.DateField(
+    date_last = models.DateTimeField(
         verbose_name='Дата просмотра',
         auto_now=True
     )
 
+    @property
+    def status(self):
+        """Поле статуса."""
+        percent = (self.time / self.lesson.total_time) * 100
+        if percent >= 80:
+            return 'Просмотрено'
+        return 'Не просмотрено'
+
     def clean(self):
+        if self.time > self.lesson.total_time:
+            raise ValidationError(
+                'Время не может быть больше времени урока'
+            )
         qs = UserProduct.objects.filter(
             user=self.user,
             product__lesson=self.lesson,

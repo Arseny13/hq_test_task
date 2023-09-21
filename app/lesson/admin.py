@@ -24,8 +24,10 @@ class UserLessonAdmin(admin.ModelAdmin):
     list_display = (
         'pk',
         'user',
-        'lesson'
+        'lesson',
+        'status'
     )
+    readonly_fields = ('status', 'date_last')
 
 
 class ProductLessonInline(admin.TabularInline):
