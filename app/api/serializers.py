@@ -12,10 +12,22 @@ class UserLessonSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(
         default=serializers.CurrentUserDefault()
     )
+    lesson = serializers.CharField(source='lesson.title')
 
     class Meta:
         model = UserLesson
-        fields = ('user', 'lesson', 'time', 'status', 'date_last',)
+        fields = ('user', 'lesson', 'time', 'status',)
+
+
+class UserLessonDateLastSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(
+        default=serializers.CurrentUserDefault()
+    )
+    lesson = serializers.CharField(source='lesson.title')
+
+    class Meta:
+        model = UserLesson
+        fields = ('user', 'lesson', 'status', 'time', 'date_last',)
 
 
 class ProductSerializer(serializers.ModelSerializer):
